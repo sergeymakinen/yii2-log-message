@@ -1,0 +1,36 @@
+{
+    "name": "sergeymakinen/yii2-log-message",
+    "homepage": "https://github.com/sergeymakinen/yii2-log-message",
+    "description": "Log message object for Yii 2 log targets",
+    "keywords": ["yii2-log-message", "yii2", "yii", "log", "logging", "message"],
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/sergeymakinen/yii2-log-message/issues",
+        "source": "https://github.com/sergeymakinen/yii2-log-message"
+    },
+    "authors": [
+        {
+            "name": "Sergey Makinen",
+            "email": "sergey@makinen.ru",
+            "homepage": "https://makinen.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "~2.0.2"
+    },
+    "require-dev": {
+        "sergeymakinen/yii2-tests": "^1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/Message.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "sergeymakinen\\tests\\log\\": "tests"
+        }
+    }
+}
