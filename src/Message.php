@@ -7,39 +7,42 @@
  * @license   https://github.com/sergeymakinen/yii2-log-message/blob/master/LICENSE MIT License
  */
 
-namespace sergeymakinen\log;
+namespace sergeymakinen\yii\logmessage;
 
 use yii\base\InvalidConfigException;
 use yii\base\Object;
+use yii\console\Request as ConsoleRequest;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use yii\log\Target;
+use yii\web\Request as WebRequest;
 
 /**
  * This class wraps a log message and exposes its properties as well as the current request/user details.
- * @property string $category the message category.
- * @property string|null $commandLine the command line.
+ * @property string $category message category.
+ * @property string|null $commandLine command line.
  * @property bool $isConsoleRequest whether the current request is a console request.
- * @property string $level the text display of the message level.
- * @property string $prefix the messsage prefix string.
- * @property string|null $sessionId the session ID.
- * @property string|null $stackTrace the stack trace.
- * @property string $text the message text.
- * @property float $timestamp the message creation timestamp.
- * @property string|null $url the current absolute URL.
- * @property int|string|null $userId the user identity ID.
- * @property string|null $userIp the user IP address.
+ * @property string $level message level as a string.
+ * @property string $prefix messsage prefix string.
+ * @property string|null $sessionId session ID.
+ * @property string|null $stackTrace stack trace as a string.
+ * @property string $text message text.
+ * @property float $timestamp message creation timestamp.
+ * @property string|null $url absolute URL.
+ * @property int|string|null $userId user identity ID.
+ * @property string|null $userIp user IP address.
  */
 class Message extends Object
 {
     /**
-     * @var array the message.
+     * @var array raw message.
      */
     public $message;
 
     /**
-     * @var Target the message target, a [[Target]] instance. May be `null`.
+     * @var Target message target.
+     * Must be a [[Target]] instance or `null`.
      */
     public $target;
 
@@ -50,8 +53,9 @@ class Message extends Object
 
     /**
      * Constructor.
-     * @param array $message the message.
-     * @param Target|null $target the message target, a [[Target]] instance.
+     * @param array $message message.
+     * @param Target|null $target message target.
+     * Must be a [[Target]] instance or `null`.
      * @param array $config name-value pairs that will be used to initialize the object properties.
      */
     public function __construct(array $message, $target = null, $config = [])
@@ -74,7 +78,7 @@ class Message extends Object
 
     /**
      * Returns the message category.
-     * @return string the message category.
+     * @return string message category.
      */
     public function getCategory()
     {
@@ -83,7 +87,7 @@ class Message extends Object
 
     /**
      * Returns the command line.
-     * @return string|null the command line, `null` if not available.
+     * @return string|null command line, `null` if not available.
      */
     public function getCommandLine()
     {
@@ -91,10 +95,9 @@ class Message extends Object
             return null;
         }
 
+        $params = [];
         if (isset($_SERVER['argv'])) {
             $params = $_SERVER['argv'];
-        } else {
-            $params = [];
         }
         return implode(' ', $params);
     }
@@ -107,9 +110,9 @@ class Message extends Object
     public function getIsConsoleRequest()
     {
         if ($this->_isConsoleRequest === null && \Yii::$app !== null) {
-            if (\Yii::$app->getRequest() instanceof \yii\console\Request) {
+            if (\Yii::$app->getRequest() instanceof ConsoleRequest) {
                 $this->_isConsoleRequest = true;
-            } elseif (\Yii::$app->getRequest() instanceof \yii\web\Request) {
+            } elseif (\Yii::$app->getRequest() instanceof WebRequest) {
                 $this->_isConsoleRequest = false;
             }
         }
@@ -121,8 +124,8 @@ class Message extends Object
     }
 
     /**
-     * Returns the text display of the message level.
-     * @return string the text display of the message level.
+     * Returns the message level as a string.
+     * @return string message level as a string.
      */
     public function getLevel()
     {
@@ -130,8 +133,8 @@ class Message extends Object
     }
 
     /**
-     * Returns the string to be prefixed to the message.
-     * @return string the messsage prefix string.
+     * Returns a string to be prefixed to the message.
+     * @return string messsage prefix string.
      */
     public function getPrefix()
     {
@@ -144,7 +147,7 @@ class Message extends Object
 
     /**
      * Returns the session ID.
-     * @return string|null the session ID, `null` if not available.
+     * @return string|null session ID, `null` if not available.
      */
     public function getSessionId()
     {
@@ -162,7 +165,7 @@ class Message extends Object
 
     /**
      * Returns the additional stack trace as a string.
-     * @return string|null the stack trace, `null` if not available.
+     * @return string|null stack trace, `null` if not available.
      */
     public function getStackTrace()
     {
@@ -178,7 +181,7 @@ class Message extends Object
 
     /**
      * Returns the message text.
-     * @return string the message text.
+     * @return string message text.
      */
     public function getText()
     {
@@ -195,7 +198,7 @@ class Message extends Object
 
     /**
      * Returns the message creation timestamp.
-     * @return float the message creation timestamp.
+     * @return float message creation timestamp.
      */
     public function getTimestamp()
     {
@@ -204,7 +207,7 @@ class Message extends Object
 
     /**
      * Returns the current absolute URL.
-     * @return null|string the current absolute URL, `null` if not available.
+     * @return null|string absolute URL, `null` if not available.
      */
     public function getUrl()
     {
@@ -217,7 +220,7 @@ class Message extends Object
 
     /**
      * Returns the user identity ID.
-     * @return int|string|null the user identity ID, `null` if not available.
+     * @return int|string|null user identity ID, `null` if not available.
      */
     public function getUserId()
     {
@@ -236,7 +239,7 @@ class Message extends Object
 
     /**
      * Returns the user IP address.
-     * @return string|null the user IP address, `null` if not available.
+     * @return string|null user IP address, `null` if not available.
      */
     public function getUserIp()
     {

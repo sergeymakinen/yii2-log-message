@@ -1,7 +1,7 @@
 <?php
 
-namespace sergeymakinen\tests\log;
+namespace sergeymakinen\yii\logmessage\tests;
 
-abstract class TestCase extends \sergeymakinen\tests\TestCase
+abstract class TestCase extends \sergeymakinen\yii\tests\TestCase
 {
 }

@@ -13,13 +13,13 @@ The preferred way to install this extension is through [composer](https://getcom
 Either run
 
 ```bash
-composer require "sergeymakinen/yii2-log-message:^1.0"
+composer require "sergeymakinen/yii2-log-message:^2.0"
 ```
 
 or add
 
 ```json
-"sergeymakinen/yii2-log-message": "^1.0"
+"sergeymakinen/yii2-log-message": "^2.0"
 ```
 
 to the require section of your `composer.json` file.
@@ -30,7 +30,7 @@ Let's take a look at the [Slack log target](https://github.com/sergeymakinen/yii
 
 ```php
 // ...
-// $message is the sergeymakinen\log\Message class instance
+// $message is the sergeymakinen\yii\logmessage\Message class instance
 $attachment = [
     'fallback' => $this->encode($this->formatMessage($message->message)),
     'title' => ucwords($message->level),

@@ -1,13 +1,17 @@
 <?php
 
-namespace sergeymakinen\tests\log;
+namespace sergeymakinen\yii\logmessage\tests;
 
-use sergeymakinen\log\Message;
-use sergeymakinen\tests\log\stubs\TestController;
+use sergeymakinen\yii\logmessage\Message;
+use sergeymakinen\yii\logmessage\tests\stubs\TestController;
+use sergeymakinen\yii\logmessage\tests\stubs\TestIdentity;
+use sergeymakinen\yii\logmessage\tests\stubs\TestSession;
+use sergeymakinen\yii\logmessage\tests\stubs\TestUser;
 use yii\base\ErrorHandler;
 use yii\console\Application as ConsoleApplication;
 use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
+use yii\log\FileTarget;
 use yii\log\Logger;
 
 class MessageTest extends TestCase
@@ -315,20 +319,19 @@ class MessageTest extends TestCase
     protected function bootApplication($closure, $method, array $config = [])
     {
         $_SERVER['REMOTE_ADDR'] = '0.0.0.0';
+        $components = [];
         if ($method === 'createWebApplication') {
             $components = [
                 'components' => [
                     'session' => [
-                        'class' => 'sergeymakinen\tests\log\stubs\TestSession',
+                        'class' => TestSession::className(),
                     ],
                     'user' => [
-                        'class' => 'sergeymakinen\tests\log\stubs\TestUser',
-                        'identityClass' => 'sergeymakinen\tests\log\stubs\TestIdentity',
+                        'class' => TestUser::className(),
+                        'identityClass' => TestIdentity::className(),
                     ],
                 ],
             ];
-        } else {
-            $components = [];
         }
         if ($method !== null) {
             $this->$method(ArrayHelper::merge(
@@ -347,7 +350,7 @@ class MessageTest extends TestCase
             }
         }
         if ($closure !== null) {
-            call_user_func($closure);
+            $closure();
             if ($method !== null) {
                 \Yii::$app->log->logger->flush();
                 $this->rawMessage = \Yii::$app->log->targets['test']->messages[0];
@@ -364,10 +367,10 @@ class MessageTest extends TestCase
         return [
             'targets' => [
                 'test' => [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::className(),
                     'levels' => ['error', 'info'],
                     'categories' => [
-                        'sergeymakinen\tests\*',
+                        __NAMESPACE__ . '\*',
                     ],
                     'prefix' => function () {
                         return 'foo';

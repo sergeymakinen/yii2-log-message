@@ -1,6 +1,6 @@
 <?php
 
-namespace sergeymakinen\tests\log\stubs;
+namespace sergeymakinen\yii\logmessage\tests\stubs;
 
 use yii\web\Session;
 

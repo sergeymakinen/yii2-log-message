@@ -21,16 +21,16 @@
         "yiisoft/yii2": "~2.0.3"
     },
     "require-dev": {
-        "sergeymakinen/yii2-tests": "^1.0"
+        "sergeymakinen/yii2-tests": "^2.0"
     },
     "autoload": {
-        "classmap": [
-            "src/Message.php"
-        ]
+        "psr-4": {
+            "sergeymakinen\\yii\\logmessage\\": "src"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "sergeymakinen\\tests\\log\\": "tests"
+            "sergeymakinen\\yii\\logmessage\\tests\\": "tests"
         }
     }
 }
