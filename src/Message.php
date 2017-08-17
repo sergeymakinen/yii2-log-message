@@ -12,7 +12,6 @@ namespace sergeymakinen\yii\logmessage;
 use yii\base\InvalidConfigException;
 use yii\base\Object;
 use yii\console\Request as ConsoleRequest;
-use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use yii\log\Target;
@@ -215,7 +214,7 @@ class Message extends Object
             return null;
         }
 
-        return Url::current([], true);
+        return \Yii::$app->request->getAbsoluteUrl();
     }
 
     /**
