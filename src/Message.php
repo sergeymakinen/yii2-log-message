@@ -214,7 +214,7 @@ class Message extends Object
             return null;
         }
 
-        return \Yii::$app->request->getAbsoluteUrl();
+        return \Yii::$app->getRequest()->getAbsoluteUrl();
     }
 
     /**
