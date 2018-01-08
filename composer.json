@@ -16,6 +16,12 @@
             "homepage": "https://makinen.ru"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "~2.0.3"
