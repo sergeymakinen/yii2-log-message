@@ -10,7 +10,7 @@
 namespace sergeymakinen\yii\logmessage;
 
 use yii\base\InvalidConfigException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\console\Request as ConsoleRequest;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
@@ -32,7 +32,7 @@ use yii\web\Request as WebRequest;
  * @property int|string|null $userId user identity ID.
  * @property string|null $userIp user IP address.
  */
-class Message extends Object
+class Message extends BaseObject
 {
     /**
      * @var array raw message.
