@@ -2,11 +2,11 @@
 
 namespace sergeymakinen\yii\logmessage\tests\stubs;
 
+use yii\base\BaseObject;
 use yii\base\InvalidCallException;
-use yii\base\Object;
 use yii\web\IdentityInterface;
 
-class TestIdentity extends Object implements IdentityInterface
+class TestIdentity extends BaseObject implements IdentityInterface
 {
     /**
      * @inheritDoc
