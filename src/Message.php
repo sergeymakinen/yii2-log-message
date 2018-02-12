@@ -3,14 +3,14 @@
  * Yii 2 log message object
  *
  * @see       https://github.com/sergeymakinen/yii2-log-message
- * @copyright Copyright (c) 2017 Sergey Makinen (https://makinen.ru)
+ * @copyright Copyright (c) 2017-2018 Sergey Makinen (https://makinen.ru)
  * @license   https://github.com/sergeymakinen/yii2-log-message/blob/master/LICENSE MIT License
  */
 
 namespace sergeymakinen\yii\logmessage;
 
+use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
-use yii\base\Object;
 use yii\console\Request as ConsoleRequest;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
@@ -32,7 +32,7 @@ use yii\web\Request as WebRequest;
  * @property int|string|null $userId user identity ID.
  * @property string|null $userIp user IP address.
  */
-class Message extends Object
+class Message extends BaseObject
 {
     /**
      * @var array raw message.
