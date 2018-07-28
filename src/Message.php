@@ -187,7 +187,7 @@ class Message extends BaseObject
         $text = $this->message[0];
         if (!is_string($text)) {
             if ($text instanceof \Throwable || $text instanceof \Exception) {
-                $text = (string) $text;
+                $text = "Error: ".$text->getMessage()."\n ".$text->getFile().':'.$text->getLine()."\n";
             } else {
                 $text = VarDumper::export($text);
             }
